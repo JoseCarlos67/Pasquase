@@ -14,9 +14,9 @@ public class TesteALex extends Application{
 
 	public static void main(String[] args) throws IOException {
 		
-		launch(args);
+		//launch(args);
 
-		String expr = "if (i=0; i<=5; i++)" + "else 2 + 3+a*5/4-16 then";
+		String expr = ";.";
 
 		AnalisadorLexico lexical = new AnalisadorLexico(new StringReader(expr));
 		lexical.yylex();

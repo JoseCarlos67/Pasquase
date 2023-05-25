@@ -11,7 +11,7 @@ public class GeraALex {
 
 		String file[] = { rootPath + subPath + "lex.flex" };
 
-		jflex.Main.main(file);
+		jflex.Main.main(file); //Gera o Scanner
 	}
 
 }

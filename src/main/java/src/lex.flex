@@ -1,35 +1,45 @@
 package src;
-
+import src.Token;
 %%
 
 %{
 	private void imprimir(String descricao, String lexema){
-	
 		System.out.println(lexema + "-" + descricao);
 	}
 %}
-
 %class AnalisadorLexico
-%type void
+%type Token
 
-BRANCO = [\n||\t|\r]
-ID = [_|a-z|A-Z][a-z|A-Z|0-9_]*
-SOMA = "+"
-SUBTRAI = "-"
-MULTI = "*"
-DIVID = "/"
-INTEIRO = 0|[1-9][0-9]*
+branco = [ |\n|\r]*
+tabulacao = [\t]+
+letra = [a-zA-Z]+
+digito = [0-9]+
+espaco = [ ]
 
 %%
 
-"if"			{imprimir("Palavra reservada", yytext());}
-"then"			{imprimir("Palavra reservada", yytext());}
-{BRANCO}		{imprimir("Espaço em branco ", yytext());}
-{ID}			{imprimir("Identificador ", yytext());}
-{SOMA}			{imprimir("Operador de soma ", yytext());}
-{SUBTRAI}		{imprimir("Operador de subtração", yytext());}
-{MULTI}			{imprimir("Operador de multiplicação", yytext());}
-{DIVID}			{imprimir("Operador de divisão", yytext());}
-{INTEIRO}		{imprimir("Numero inteiro ", yytext());}
+"."		{imprimir("Ponto", yytext());}
+","		{imprimir("Vírgula", yytext());}
+";"		{imprimir("Ponto e vírgula", yytext());}
+"("		{imprimir("Abre parêntese", yytext());}
+")"		{imprimir("Fecha parêntese", yytext());}
+"["		{imprimir("Abre colchete", yytext());}
+"]"		{imprimir("Fecha colchete", yytext());}
+"+"		{imprimir("Operador de adição", yytext());}
+"-" 	{imprimir("Operador de subtração", yytext());}
+"'"		{imprimir("Aspas simples", yytext());}
+"|"		{imprimir("Pipe", yytext());}
+"!"		{imprimir("Exclamação", yytext());}
+"*"		{imprimir("Multiplicação", yytext());}
+"^"		{imprimir("Potenciação", yytext());}
+">" 	{imprimir("Maior", yytext());}
+"<" 	{imprimir("Menor", yytext());}
+"<>" 	{imprimir("Diferente", yytext());}
+"<=" 	{imprimir("Menor igual", yytext());}
+">=" 	{imprimir("Maior igual", yytext());}
+" \%" 	{imprimir("Resto da divisão", yytext());}
+"=" 	{imprimir("Atribuição", yytext());}
+"==" 	{imprimir("Igualdade", yytext());}
+"/" 	{imprimir("Divisão", yytext());}
 
 . { throw new RuntimeException("Caractere invalido" + yytext()); }
